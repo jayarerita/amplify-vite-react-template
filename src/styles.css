@@ -1,0 +1,379 @@
+@import "tailwindcss";
+
+/* Class-based dark mode */
+@variant dark (&:where(.dark, .dark *));
+
+/* ─── Tailwind v4 theme tokens (replaces tailwind.config.ts) ─────────────── */
+/* inline = values reference CSS custom properties defined below              */
+@theme inline {
+  /* Colors */
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+  --color-sidebar: hsl(var(--sidebar-background));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar-primary: hsl(var(--sidebar-primary));
+  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
+  --color-sidebar-accent: hsl(var(--sidebar-accent));
+  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
+  --color-sidebar-border: hsl(var(--sidebar-border));
+  --color-sidebar-ring: hsl(var(--sidebar-ring));
+
+  /* Border radius */
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  /* Animations */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+
+    to {
+      height: 0;
+    }
+  }
+}
+
+@layer base {
+  :root {
+    --background: 250 20% 98%;
+    /* Light Mode: Very light blue-gray */
+    --foreground: 250 23% 23%;
+    /* Light Mode: Dark blue for text */
+
+    --card: 0 0% 100%;
+    /* Light Mode: White */
+    --card-foreground: 250 23% 23%;
+
+    --popover: 0 0% 100%;
+    /* Light Mode: White */
+    --popover-foreground: 250 23% 23%;
+
+    --primary: 250 100% 55%;
+    /* Light Mode: Vibrant blue */
+    --primary-foreground: 250 20% 98%;
+    /* Light Mode: Very light text on primary */
+
+    --secondary: 250 40% 84%;
+    /* Light Mode: Lighter blue */
+    --secondary-foreground: 250 45% 35%;
+    /* Light Mode: Readable darker blue on secondary */
+
+    --muted: 250 25% 92%;
+    /* Light Mode: Very light muted blue/gray */
+    --muted-foreground: 250 10% 44%;
+    /* Light Mode: Slightly darker muted blue for text */
+
+    --accent: 230 80% 52%;
+    /* Light Mode: A slightly different blue */
+    --accent-foreground: 250 20% 98%;
+    /* Light Mode: Light text on accent */
+
+    --destructive: 14 100% 58%;
+    /* Light Mode: Standard destructive red/orange */
+    --destructive-foreground: 250 20% 98%;
+
+    --border: 250 20% 88%;
+    /* Light Mode: Light blue/gray border */
+    --input: 250 25% 95%;
+    /* Light Mode: Slightly off-white input background */
+    --ring: 250 100% 55%;
+    /* Light Mode: Primary blue for focus rings */
+
+    --radius: 0.5rem;
+
+    /* Sidebar Light Theme */
+    --sidebar-background: 250 23% 23%;
+    /* Dark Blue */
+    --sidebar-foreground: 250 20% 95%;
+    /* Light text */
+    --sidebar-primary: 250 20% 95%;
+    /* Light color for active/hover states */
+    --sidebar-primary-foreground: 250 23% 23%;
+    /* Dark blue text on sidebar primary */
+    --sidebar-accent: 250 60% 46%;
+    /* Medium blue for accents */
+    --sidebar-accent-foreground: 250 20% 95%;
+    /* Light text on sidebar accent */
+    --sidebar-border: 250 25% 35%;
+    --sidebar-ring: 250 100% 55%;
+
+    /* Chart Colors - Light/Dark Agnostic (using HSL values directly) */
+    --chart-1: 240 100% 60%;
+    --chart-2: 200 75% 62%;
+    --chart-3: 270 80% 56%;
+    --chart-4: 220 70% 68%;
+    --chart-5: 255 100% 55%;
+  }
+
+  .dark {
+    --background: 250 15% 14%;
+    /* Dark Mode: Very dark blue */
+    --foreground: 250 15% 89%;
+    /* Dark Mode: Light blue text */
+
+    --card: 250 15% 19%;
+    /* Dark Mode: Slightly lighter dark blue for cards */
+    --card-foreground: 250 15% 89%;
+
+    --popover: 250 15% 17%;
+    /* Dark Mode: Dark popovers */
+    --popover-foreground: 250 15% 89%;
+
+    --primary: 250 100% 65%;
+    /* Dark Mode: Brighter blue */
+    --primary-foreground: 250 15% 14%;
+    /* Dark Mode: Dark text on bright primary */
+
+    --secondary: 250 20% 29%;
+    /* Dark Mode: Darker, desaturated blue */
+    --secondary-foreground: 250 20% 85%;
+    /* Dark Mode: Lighter text on dark secondary */
+
+    --muted: 250 10% 24%;
+    /* Dark Mode: Dark muted blue/gray */
+    --muted-foreground: 250 10% 69%;
+    /* Dark Mode: Lighter muted text */
+
+    --accent: 235 90% 63%;
+    /* Dark Mode: A distinct blue for accent */
+    --accent-foreground: 250 10% 10%;
+    /* Dark Mode: Dark text on accent */
+
+    --destructive: 10 100% 63%;
+    /* Dark Mode: Slightly brighter destructive */
+    --destructive-foreground: 250 20% 95%;
+
+    --border: 250 15% 29%;
+    /* Dark Mode: Darker blue/gray border */
+    --input: 250 10% 21%;
+    /* Dark Mode: Dark input background */
+    --ring: 250 100% 65%;
+    /* Dark Mode: Primary blue for focus rings */
+
+    /* Sidebar Dark Theme */
+    --sidebar-background: 250 10% 10%;
+    /* Even darker blue */
+    --sidebar-foreground: 250 15% 85%;
+    /* Light text */
+    --sidebar-primary: 250 15% 85%;
+    /* Light color for active/hover */
+    --sidebar-primary-foreground: 250 10% 10%;
+    /* Dark text on sidebar primary */
+    --sidebar-accent: 250 25% 35%;
+    /* Darker accent blue */
+    --sidebar-accent-foreground: 250 15% 85%;
+    /* Light text on sidebar accent */
+    --sidebar-border: 250 10% 20%;
+    --sidebar-ring: 250 100% 65%;
+  }
+
+  .theme {
+    --animate-aurora: aurora 8s ease-in-out infinite alternate;
+    --animate-marquee: marquee var(--duration) infinite linear;
+    --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    /* Remove explicit font-family to let Next/Font variables take precedence */
+  }
+}
+
+@theme inline {
+  @keyframes aurora {
+    0% {
+      background-position: 0% 50%;
+      transform: rotate(-5deg) scale(0.9);
+    }
+
+    25% {
+      background-position: 50% 100%;
+      transform: rotate(5deg) scale(1.1);
+    }
+
+    50% {
+      background-position: 100% 50%;
+      transform: rotate(-3deg) scale(0.95);
+    }
+
+    75% {
+      background-position: 50% 0%;
+      transform: rotate(3deg) scale(1.05);
+    }
+
+    100% {
+      background-position: 0% 50%;
+      transform: rotate(-5deg) scale(0.9);
+    }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+
+  @keyframes marquee-vertical {
+    from {
+      transform: translateY(0);
+    }
+
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
+}
+
+.gsi-material-button {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -webkit-appearance: none;
+  background-color: #f2f2f2;
+  background-image: none;
+  border: none;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #1f1f1f;
+  cursor: pointer;
+  font-family: 'Roboto', arial, sans-serif;
+  font-size: 14px;
+  height: 40px;
+  letter-spacing: 0.25px;
+  outline: none;
+  overflow: hidden;
+  padding: 0 12px;
+  position: relative;
+  text-align: center;
+  -webkit-transition: background-color .218s, border-color .218s, box-shadow .218s;
+  transition: background-color .218s, border-color .218s, box-shadow .218s;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: auto;
+  max-width: 400px;
+  min-width: min-content;
+}
+
+.gsi-material-button .gsi-material-button-icon {
+  height: 20px;
+  margin-right: 12px;
+  min-width: 20px;
+  width: 20px;
+}
+
+.gsi-material-button .gsi-material-button-content-wrapper {
+  -webkit-align-items: center;
+  align-items: center;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  height: 100%;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+
+.gsi-material-button .gsi-material-button-contents {
+  -webkit-flex-grow: 0;
+  flex-grow: 0;
+  font-family: 'Roboto', arial, sans-serif;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: top;
+}
+
+.gsi-material-button .gsi-material-button-state {
+  -webkit-transition: opacity .218s;
+  transition: opacity .218s;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.gsi-material-button:disabled {
+  cursor: default;
+  background-color: #ffffff61;
+}
+
+.gsi-material-button:disabled .gsi-material-button-state {
+  background-color: #1f1f1f1f;
+}
+
+.gsi-material-button:disabled .gsi-material-button-contents {
+  opacity: 38%;
+}
+
+.gsi-material-button:disabled .gsi-material-button-icon {
+  opacity: 38%;
+}
+
+.gsi-material-button:not(:disabled):active .gsi-material-button-state,
+.gsi-material-button:not(:disabled):focus .gsi-material-button-state {
+  background-color: #001d35;
+  opacity: 12%;
+}
+
+.gsi-material-button:not(:disabled):hover {
+  -webkit-box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30), 0 1px 3px 1px rgba(60, 64, 67, .15);
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30), 0 1px 3px 1px rgba(60, 64, 67, .15);
+}
+
+.gsi-material-button:not(:disabled):hover .gsi-material-button-state {
+  background-color: #001d35;
+  opacity: 8%;
+}
