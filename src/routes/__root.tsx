@@ -6,7 +6,6 @@ import {
   Scripts,
   ErrorComponent,
   type ErrorComponentProps,
-  createRouter,
 } from "@tanstack/react-router"
 import appCss from "../styles.css?url"
 
